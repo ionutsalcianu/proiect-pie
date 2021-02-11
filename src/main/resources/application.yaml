@@ -1,0 +1,76 @@
+server:
+  port: 8123
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,application/javascript,text/html,text/xml,text/plain
+spring:
+  profiles:
+    active: ${ACTIVE_ENV}
+  application:
+    name: coupons-api
+---
+spring:
+  profiles: mysql-dev
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: MYSQL
+    show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 100
+        order_updates: true
+        order_inserts: true
+        batch_versioned_data: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        cache:
+          use_second_level_cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/PIE
+    username: coupon_user
+    password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+#      connection-init-sql: call DBMS_APPLICATION_INFO.SET_MODULE ('${spring.application.name}', null)
+      connection-test-query: select 1 from dual
+---
+#prod db configuration
+spring:
+  profiles: mysql-prod
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: MYSQL
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 100
+        order_updates: true
+        order_inserts: true
+        batch_versioned_data: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        cache:
+          use_second_level_cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/PIE
+    username: coupon_user
+    password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+#      connection-init-sql: call DBMS_APPLICATION_INFO.SET_MODULE ('${spring.application.name}', null)
+      connection-test-query: select 1 from dual
+---
+spring:
+  profiles: log-dev
+logging.level:
+  org.apache.tomcat.util.threads: INFO
+---
+spring:
+  profiles: dev
+spring.profiles.include: mysql-dev
+---
+spring:
+  profiles: prod
+spring.profiles.include: log-dev, mysql-prod
