@@ -24,6 +24,9 @@ public class Coupon {
     @Column(name = "CP_C_ID")
     private Long customerId;
 
+    @Column(name = "CP_S_ID")
+    private Long shopId;
+
     @Column(name = "CP_VALUE")
     private Long value;
 
@@ -42,8 +45,12 @@ public class Coupon {
     @Column(name = "CP_USED_DATE")
     private Date usedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="CP_C_ID",insertable = false,updatable = false)
     private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="CP_S_ID",insertable = false,updatable = false)
+    private Shop shop;
 
 }

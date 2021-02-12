@@ -9,15 +9,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import ro.pie.dto.BalanceUpdateDto;
+import ro.pie.dto.CouponDto;
 import ro.pie.dto.CustomerDto;
+import ro.pie.dto.UserDto;
 import ro.pie.exception.DataNotFoundException;
+import ro.pie.exception.EmailAlreadyExistsException;
 import ro.pie.model.Coupon;
 import ro.pie.model.Customer;
 import ro.pie.repository.CustomerRepository;
+import ro.pie.util.CustomerTransformer;
 import ro.pie.util.UserType;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,6 +66,14 @@ public class CustomerService implements UserDetailsService {
         throw new DataNotFoundException("Customer " + customerId + " not found");
     }
 
+    public Long getCustomerBalance(Long customerId) {
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        if(customerOptional.isPresent()) {
+           return customerOptional.get().getBalance();
+        }
+        throw new DataNotFoundException("Customer " + customerId + " not found");
+    }
+
     private String decodeFiscal(String encodedFiscal){
         String firstRoundDecodeString = new String (Base64.getDecoder().decode(encodedFiscal.getBytes()));
         String decodedString = new String(Base64.getDecoder().decode(firstRoundDecodeString.getBytes()));
@@ -69,7 +84,7 @@ public class CustomerService implements UserDetailsService {
         throw new IllegalArgumentException("Wrong fiscal code");
     }
 
-    public void updateBalance(Long customerId, String encodedFiscal ) throws MailjetSocketTimeoutException, MailjetException {
+    public BalanceUpdateDto updateBalance(Long customerId, String encodedFiscal ) throws MailjetSocketTimeoutException, MailjetException {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if(customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
@@ -87,12 +102,35 @@ public class CustomerService implements UserDetailsService {
             }
             smartContractService.addPoints(customer.getKey(), nrOfPoints);
             customerRepository.save(customer);
+            return BalanceUpdateDto.builder().value(customer.getBalance()).couponsCreated(sum/10).build();
         }else{
             throw new DataNotFoundException("Customer " + customerId + " not found");
         }
     }
 
+    public void updateCustomer(CustomerDto customerDto, Long customerId){
+        if(customerRepository.findByEmailAndIdNot(customerDto.getEmail(), customerId) != null) {
+            throw new EmailAlreadyExistsException("Email "+customerDto.getEmail()+" is already used");
+        }
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        if(customerOptional.isPresent()){
+            Customer customer = customerOptional.get();
+            customer.setLastName(customerDto.getLastName());
+            customer.setFirstName(customerDto.getFirstName());
+            customer.setEmail(customerDto.getEmail());
+            if(customerDto.getPassword() != null && !customerDto.getPassword().isEmpty()){
+                customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+            }
+            customerRepository.save(customer);
+        }else{
+            throw new RuntimeException("Internal error");
+        }
+    }
+
     public void createCustomer(CustomerDto customerDto){
+        if(customerRepository.findByEmail(customerDto.getEmail()) != null) {
+            throw new EmailAlreadyExistsException("Email "+customerDto.getEmail()+" is already used");
+        }
         String publicKey = generatePublicKey();
         Customer customer = new Customer();
         customer.setEmail(customerDto.getEmail());
@@ -104,7 +142,6 @@ public class CustomerService implements UserDetailsService {
         customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
         customerRepository.save(customer);
         smartContractService.createAccount(publicKey);
-
     }
 
     @SneakyThrows
@@ -119,6 +156,12 @@ public class CustomerService implements UserDetailsService {
         return "0x"+result.toString();
 
     }
+
+    public UserDto getCustomerByEmail(String email){
+        CustomerTransformer customerTransformer = new CustomerTransformer();
+        return customerTransformer.toDto(customerRepository.findByEmail(email));
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) {
         Customer customer = customerRepository.findByEmail(email);

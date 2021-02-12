@@ -14,6 +14,7 @@ import ro.pie.service.AdminService;
 import ro.pie.service.CouponService;
 
 @Slf4j
+@CrossOrigin(origins = "http://localhost")
 @RestController
 @RequestMapping("/api/v1/admin-controller")
 @Api(value = "admin-controller")
@@ -45,7 +46,7 @@ public class AdminController {
             @ApiResponse(code = 500, message = "Internal server error", response = ErrorDto.class),
             @ApiResponse(code = 200, message = "Success")
     })
-    public void useCoupon(@RequestParam Long customerId, @RequestParam String couponCode) {
-        couponService.useCoupon(customerId, couponCode);
+    public void useCoupon(@RequestParam Long customerId, @RequestParam String couponCode, @RequestParam Long shopId) {
+        couponService.useCoupon(customerId, couponCode, shopId);
     }
 }
