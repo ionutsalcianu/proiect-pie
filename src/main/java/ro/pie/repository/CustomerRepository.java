@@ -9,5 +9,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findByEmailAndIdNot(String email, Long customerId);
     Customer findByEmail(String email);
+    List<Customer> findAllByRole(String role);
 
 }

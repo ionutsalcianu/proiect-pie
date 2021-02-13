@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ro.pie.dto.BalanceUpdateDto;
-import ro.pie.dto.CouponDto;
-import ro.pie.dto.CustomerDto;
-import ro.pie.dto.ErrorDto;
+import ro.pie.dto.*;
 import ro.pie.service.CouponService;
 import ro.pie.service.CustomerService;
 
@@ -120,6 +117,19 @@ public class CustomerController {
     })
     public Long getCustomerActiveCoupons(@RequestParam Long customerId) {
         return couponService.countCustomerActiveCoupons(customerId);
+    }
+
+    @GetMapping(value = "/customer-historical-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @ApiOperation(value = "Get customer historical data based on customer id")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "Could not find the requested customer", response = ErrorDto.class),
+            @ApiResponse(code = 400, message = "Bad request, one of the arguments may be invalid", response = ErrorDto.class),
+            @ApiResponse(code = 200, message = "Success")
+    })
+    public List<CustomerHistoricalDataDto> getCustomerHistoricalData(@RequestParam Long customerId) {
+        return customerService.getCustomerHistoricalData(customerId);
     }
 
 }

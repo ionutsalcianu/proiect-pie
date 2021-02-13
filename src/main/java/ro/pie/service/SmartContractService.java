@@ -5,19 +5,26 @@ import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tuples.generated.Tuple5;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.tx.gas.StaticGasProvider;
+import ro.pie.dto.CustomerHistoricalDataDto;
 
 import javax.transaction.TransactionalException;
 import java.math.BigInteger;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
 @Slf4j
 public class SmartContractService {
 
-    private static final String CONTRACT_ADDRESS = "0xD9c04CF816FE1F431b88983a0c9d55CC992d5184";
+    private static final String CONTRACT_ADDRESS = "0xDB4a08883b60246e27f49b648726CCFC26560cB5";
     private static final String ADMIN_ACCOUNT = "0x918e3947e1a3d97befc3f51bd8b31416bbdad5f9";
     private static final String ADMIN_PRIVATE_KEY = "0xc41824a1e0e4f987effed5c274735943a36cb370e09be27fbfc058d90d7c49f3";
 
@@ -58,6 +65,31 @@ public class SmartContractService {
 
     }
 
+    public List<CustomerHistoricalDataDto> getCustomerHistoricalData(String publicKey){
+        try{
+            Tuple5<List<BigInteger>, List<String>, List<BigInteger>, List<BigInteger>, List<BigInteger>> tuple = smartContract.getUserHistory(publicKey).send();
+            List<CustomerHistoricalDataDto> result = new ArrayList<>();
+            for( int i=0; i< tuple.component1().size(); i++){
+                result.add(toDto(LocalDateTime.ofInstant(Instant.ofEpochSecond(tuple.component1().get(i).longValue()), ZoneId.systemDefault()),
+                        tuple.component3().get(i).longValue(),
+                        tuple.component4().get(i).longValue(),
+                        tuple.component5().get(i).longValue()));
+            }
+            return result;
+        }catch(Exception e){
+            log.error("Failed to create user in blockchain");
+            throw new TransactionalException("Transaction in blockchain failed", e);
+        }
+    }
+
+    private CustomerHistoricalDataDto toDto(LocalDateTime timestamp, Long points, Long activeCoupons, Long totalCoupons){
+        return CustomerHistoricalDataDto.builder()
+                .activeCoupons(activeCoupons)
+                .points(points)
+                .timestamp(timestamp)
+                .totalCoupons(totalCoupons).build();
+    }
+
     public void createAccount(String publicKey) {
         try{
             smartContract.createUserHistory(publicKey).send();
@@ -66,36 +98,4 @@ public class SmartContractService {
             throw new TransactionalException("Transaction in blockchain failed", e);
         }
     }
-
-
-//    public String getAccounts() throws IOException {
-////        Web3j web3 = Web3j.build(new HttpService());
-//        ContractGasProvider gasProvider;
-//        gasProvider = new DefaultGasProvider();
-//        Admin web3 = Admin.build(new HttpService());
-//        //Accessing to passport service as admin and creating new passport for JOHN_ACCOUNT
-//        Credentials credentials = Credentials.create(ADMIN_PRIVATE_KEY);
-//        CouponSmartContract couponSmartContract = CouponSmartContract.load(CONTRACT_ADDRESS, web3, credentials, gasProvider);
-////        couponSmartContract.mint(ADMIN_ACCOUNT, BigInteger.valueOf(20));
-//        //Accessing to passport service as John and read passport
-////        Credentials credentials1 = Credentials.create(JOHN_PRIVATE_KEY);
-////        PassportService johnPassportService = PassportService.load(CONTRACT_ADDRESS, web3, credentials1, gasProvider);
-//        BigInteger balance = null;
-//        try {
-//            balance = couponSmartContract.balances(ADMIN_ACCOUNT).send();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        System.out.println("John most recent data: " + balance);
-//        return couponSmartContract.balances(ADMIN_ACCOUNT).toString();
-//        //tracking by printing all history records:
-////        System.out.println("Tracking all history records: ");
-////        for (int i = 0; i < couponSmartContract.getHistoryRecordLength().send().intValue(); i++) {
-////            Tuple3<BigInteger, String, String> record = couponSmartContract.getHistoryRecord(BigInteger.valueOf(i)).send();
-////            System.out.println("********************************");
-////            System.out.println("Incident time " + Instant.ofEpochSecond(record.component1().longValue()));
-////            System.out.println("Account updated: " + record.component2());
-////            System.out.println("Updated passport data: " + record.component3());
-////        }
-//    }
 }

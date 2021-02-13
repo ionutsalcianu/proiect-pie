@@ -10,15 +10,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import ro.pie.dto.BalanceUpdateDto;
-import ro.pie.dto.CouponDto;
-import ro.pie.dto.CustomerDto;
-import ro.pie.dto.UserDto;
+import ro.pie.dto.*;
 import ro.pie.exception.DataNotFoundException;
 import ro.pie.exception.EmailAlreadyExistsException;
+import ro.pie.exception.ReceiptUsedException;
 import ro.pie.model.Coupon;
 import ro.pie.model.Customer;
+import ro.pie.model.Receipt;
 import ro.pie.repository.CustomerRepository;
+import ro.pie.repository.ReceiptRepository;
 import ro.pie.util.CustomerTransformer;
 import ro.pie.util.UserType;
 
@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 @Service
 public class CustomerService implements UserDetailsService {
 
-    private static Pattern pattern = Pattern.compile("^(\\d+) [0-9]+(\\.0?)? (\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})$");
+    private static Pattern pattern = Pattern.compile("^(\\d+) [0-9]+(\\.0?)? (\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2}) [1-9][0-9]?$");
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -46,6 +46,9 @@ public class CustomerService implements UserDetailsService {
 
     @Autowired
     private CouponService couponService;
+
+    @Autowired
+    private ReceiptRepository receiptRepository;
 
     @Autowired
     MailjetService mailjetService;
@@ -84,8 +87,10 @@ public class CustomerService implements UserDetailsService {
         throw new IllegalArgumentException("Wrong fiscal code");
     }
 
-    public BalanceUpdateDto updateBalance(Long customerId, String encodedFiscal ) throws MailjetSocketTimeoutException, MailjetException {
+    public BalanceUpdateDto updateBalance(Long customerId, String encodedFiscal ) throws MailjetSocketTimeoutException, MailjetException, ReceiptUsedException {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        receiptRepository.findById(encodedFiscal).ifPresent( e -> {throw new ReceiptUsedException("This receipt has been already used");});
+        Receipt receipt = Receipt.builder().hash(encodedFiscal).build();
         if(customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
             String decodedFiscal = decodeFiscal(encodedFiscal);
@@ -94,15 +99,16 @@ public class CustomerService implements UserDetailsService {
             if(sum >= 10) {
                 customer.setBalance(sum % 10);
                 for( int i=0; i < sum / 10; i++){
-                    Coupon coupon = couponService.generateCoupon(customerId);
-                    mailjetService.sendEmail(customer.getEmail(),customer.getFirstName(),coupon.getValue(), coupon.getCode());
+                    Coupon coupon = couponService.generateCoupon(customerId, 100L);
+                    mailjetService.sendEmail(customer.getEmail(),customer.getFirstName(),coupon.getValue(), coupon.getCode(), coupon.getExpirationDate());
                 }
             } else {
                 customer.setBalance(sum);
             }
             smartContractService.addPoints(customer.getKey(), nrOfPoints);
             customerRepository.save(customer);
-            return BalanceUpdateDto.builder().value(customer.getBalance()).couponsCreated(sum/10).build();
+            receiptRepository.save(receipt);
+            return BalanceUpdateDto.builder().value(nrOfPoints).currentBalance(customer.getBalance()).couponsCreated(sum/10).activeCoupons(couponService.countCustomerActiveCoupons(customerId)).build();
         }else{
             throw new DataNotFoundException("Customer " + customerId + " not found");
         }
@@ -169,5 +175,10 @@ public class CustomerService implements UserDetailsService {
             throw new DataNotFoundException("Customer with email "+ email + " not found");
         }
         return User.withUsername(customer.getEmail()).password(customer.getPassword()).authorities("USER").build();
+    }
+
+    public List<CustomerHistoricalDataDto> getCustomerHistoricalData(Long customerId){
+        Customer customer = customerRepository.getOne(customerId);
+        return smartContractService.getCustomerHistoricalData(customer.getKey());
     }
 }

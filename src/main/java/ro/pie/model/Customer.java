@@ -42,6 +42,13 @@ public class Customer {
     @Column(name = "C_ROLE")
     private String role;
 
+    @Column(name = "C_S_ID")
+    private Long shopId;
+
     @OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
     private Set<Coupon> coupons;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="C_S_ID",insertable = false,updatable = false)
+    private Shop shop;
 }

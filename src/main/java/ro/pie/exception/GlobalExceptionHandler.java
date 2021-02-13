@@ -29,10 +29,27 @@ public class GlobalExceptionHandler {
         return createErrorDto(e, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CouponException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDto couponException(CouponException e) {
+        log.error("Encountered error", e);
+        return createErrorDto(e, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(ReceiptUsedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDto illegalReceiptArgument(ReceiptUsedException e) {
+        log.error("Encountered error", e);
+        return createErrorDto(e, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(TransactionalException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ErrorDto internalError(IllegalArgumentException e) {
+    public ErrorDto internalError(TransactionalException e) {
         log.error("Encountered error", e);
         return createErrorDto(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }

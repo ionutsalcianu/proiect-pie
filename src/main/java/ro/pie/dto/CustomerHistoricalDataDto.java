@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BalanceUpdateDto {
-    private Long value;
-    private Long couponsCreated;
+public class CustomerHistoricalDataDto {
+
+    private LocalDateTime timestamp;
+    private Long points;
     private Long activeCoupons;
-    private Long currentBalance;
+    private Long totalCoupons;
 }

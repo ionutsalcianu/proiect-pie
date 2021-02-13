@@ -26,4 +26,7 @@ public class Shop {
 
     @OneToMany(mappedBy="shop",fetch = FetchType.LAZY)
     private Set<Coupon> coupons;
+
+    @OneToMany(mappedBy="shop",fetch = FetchType.LAZY)
+    private Set<Customer> customers;
 }
