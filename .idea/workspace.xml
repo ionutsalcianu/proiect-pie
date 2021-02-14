@@ -4,86 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b3ca798-72a1-4bea-9546-09fc9206b995" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ro/pie/dto/CustomerHistoricalDataDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ro/pie/exception/ReceiptUsedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ro/pie/repository/ReceiptRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ro/pie/util/CampaignType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3b3ca798-72a1-4bea-9546-09fc9206b995" name="Default Changelist" comment="update all changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coupons-api.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/CouponsApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/CouponsApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/dto/BalanceUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/dto/BalanceUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/model/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/model/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/repository/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/repository/CustomerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/CouponService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/CouponService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/CustomerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/MailjetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/MailjetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/SmartContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/SmartContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/coupons-api.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/CouponsApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/CouponsApiApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/config/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/config/SwaggerConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/controller/CustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/BalanceUpdateDto$BalanceUpdateDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/BalanceUpdateDto$BalanceUpdateDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/BalanceUpdateDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/BalanceUpdateDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/CouponDto$CouponDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/CouponDto$CouponDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/CouponDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/CouponDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/CustomerDto$CustomerDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/CustomerDto$CustomerDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/CustomerDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/CustomerDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/ErrorDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/ErrorDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/UserDto$UserDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/UserDto$UserDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/dto/UserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/exception/CouponException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/exception/CouponException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/exception/DataNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/exception/DataNotFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/exception/EmailAlreadyExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/exception/EmailAlreadyExistsException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/exception/GlobalExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/exception/WrongPasswordException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/exception/WrongPasswordException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Coupon$CouponBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Coupon$CouponBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Coupon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Coupon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Customer$CustomerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Customer$CustomerBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Customer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Shop$ShopBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Shop$ShopBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/model/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/model/Shop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/repository/CouponRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/repository/CouponRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/repository/CustomerRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/repository/CustomerRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/repository/ShopRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/repository/ShopRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/AdminService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CouponSmartContract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/CustomerService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/MailjetService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/MailjetService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/SmartContractService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/SmartContractService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/util/CouponTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/util/CouponTransformer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/util/CustomerTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/util/CustomerTransformer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/util/UserType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/util/UserType.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,19 +48,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CouponsApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="coupons-api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ro.pie.CouponsApiApplication" />
@@ -168,7 +79,9 @@
       <workItem from="1613045946280" duration="20138000" />
       <workItem from="1613146683652" duration="4576000" />
       <workItem from="1613153302431" duration="8681000" />
-      <workItem from="1613203422288" duration="11873000" />
+      <workItem from="1613203422288" duration="12861000" />
+      <workItem from="1613233492949" duration="1831000" />
+      <workItem from="1613282364280" duration="5570000" />
     </task>
     <servers />
   </component>
@@ -196,5 +109,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update all changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="update all changes" />
   </component>
 </project>

@@ -66,7 +66,7 @@ public class MailjetService {
                                                 .put("Name", firstName)))
                                 .put(Emailv31.Message.TEMPLATEID, campaignId)
                                 .put(Emailv31.Message.TEMPLATELANGUAGE, true)
-                                .put(Emailv31.Message.SUBJECT, "Christmas present")
+                                .put(Emailv31.Message.SUBJECT, "Here is a present for you")
                                 .put(Emailv31.Message.VARIABLES, new JSONObject()
                                         .put("name", firstName)
                                         .put("expiredDate", df.format(expireDate))
