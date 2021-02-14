@@ -1,0 +1,373 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="img/coupon.png">
+    <title>
+        COUPONS APP
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="css/fonts-google-roboto.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Material Kit CSS -->
+    <link href="css/templatemo-style.css" rel="stylesheet">
+    <link href="css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="modal fade" id="wrong_input_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Please insert a valid value!</b></h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class='templatemo-blue-button width-100' data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+	<div class="modal fade" id="coupon_used_modal" role="dialog">
+		<div class="modal-dialog" style="max-width: 60%;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="coupon-used-h"></h4>
+				</div>
+				<div class="modal-body">
+					<p id="coupon-used-p"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="receipt_modal" role="dialog">
+		<div class="modal-dialog" style="max-width: 60%;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"><b>Generated receipt code!</b></h4>
+				</div>
+				<div class="modal-body">
+					<p id="receipt-p"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">Copy and Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper">
+		<div class="sidebar" data-color="azure" data-background-color="white">
+
+			<!--
+		  Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+		  Tip 2: you can also add an image using data-image tag
+		-->
+
+			<div class="logo">
+				<div class="row">
+					<div class="column" style="width: 30%; margin-left: 13%">
+						<img style="width:40px" src="img/coupon.png" />
+					</div>
+					<div class="column" style="width:70%; margin-left: -160%">
+						<a href="#" class="simple-text logo-normal">
+							C-APP
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<li class="nav-item ">
+						<a class="nav-link" href="./dashboard.html">
+							<i class="material-icons">dashboard</i>
+							<p>Your Dashboard</p>
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="./history.html">
+							<i class="material-icons">history</i>
+							<p>Your History</p>
+						</a>
+					</li>
+					<li class="nav-item" id='create_user_tab'>
+						<a class="nav-link" href="./user.html">
+							<i class="material-icons">person</i>
+							<p>Your Account</p>
+						</a>
+					</li>
+					<li class="nav-item active" id='admin_tab'>
+						<a class="nav-link" href="./admin.html">
+							<i class="material-icons">settings</i>
+							<p>Admin</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-panel">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+						<span class="navbar-toggler-icon icon-bar"></span>
+					</button>
+					<div class="navbar-wrapper">
+						<a class="navbar-brand" href="">Admin Page</a>
+					</div>
+						<div class="collapse navbar-collapse justify-content-end">
+					<ul class="navbar-nav" >
+						<li class="nav-item dropdown" style="text-transform: none" id="alerts-button">
+							<a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="material-icons">notifications</i>
+								<span class="notification" id="number_of_alerts"></span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" id="alerts_enumeration_div">
+								<a class="dropdown-item" id="alerts-a" href="history.html">No active alerts!</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown" style="text-transform: none">
+							<a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="material-icons">person</i>
+								<p class="d-lg-none d-md-block">
+									Account
+								</p>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+								<a class="dropdown-item" href="user.html" id="username_display"></a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#" id="logout">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="content" style="display: block; margin-left: auto; margin-right: auto;">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-info">
+									<h4 class="card-title">Campaign</h4>
+									<p class="card-category">Create a campaign</p>
+								</div>
+								<div class="card-body">
+									<form>
+										<div class="col-md-8">
+											<h4>Select Event: </h4>
+											<select id='nb_access_events' class='minimal' style='width:40%;'>
+											</select>
+										</div>
+										<button class="btn btn-info pull-right" id="create_new_campaign">Create</button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+							&nbsp;
+
+							<div class="card">
+								<div class="card-header card-header-info">
+									<h4 class="card-title">Generate receipt</h4>
+									<p class="card-category">Insert the value of the receipt</p>
+								</div>
+								<div class="card-body">
+									<form>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label class="bmd-label-floating">Value</label>
+												<input type="text" class="form-control" id="valueReceipt">
+											</div>
+										</div>
+										<button class="btn btn-info pull-right" id="create_new_receipt">Generate</button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+							&nbsp;
+
+							<div class="card">
+								<div class="card-header card-header-info">
+									<h4 class="card-title">Coupon</h4>
+									<p class="card-category">Use a coupon for an user</p>
+								</div>
+								<div class="card-body">
+									<form>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">Email Address</label>
+													<input type="text" class="form-control" id="email">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">Coupon Code</label>
+													<input type="text" class="form-control" id="coupon_code">
+												</div>
+											</div>
+										</div>
+										<button class="btn btn-info pull-right" id="use_coupon">Use</button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="copyright float-right">
+						&copy;
+						<script>
+							document.write(new Date().getFullYear())
+						</script>
+					</div>
+					<!-- your footer here -->
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="js/core/jquery.min.js"></script>
+	<script src="js/core/popper.min.js"></script>
+	<script src="js/core/bootstrap-material-design.min.js"></script>
+	<script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<script src="js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+
+	<script src='js/graph_interface.js'></script>
+	<script src='js/nfc_interface.js'></script>
+
+	<script>
+		//TODO functions for buttons  && calls for backend
+	
+		$("#use_coupon").click(function(e){
+			$.LoadingOverlay("show");	
+			e.preventDefault();
+			var email = $("#email").val();
+			var adminId = sessionStorage.getItem("customerId");
+			var couponCode = $("#coupon_code").val();
+			$.ajax({
+				url: "http://localhost:8123/api/v1/admin-controller/useCoupon",
+				type: "POST",
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader ("Authorization", "Basic " + btoa( "api-user:admin" ));
+					},
+				data:{'couponCode':couponCode,"adminId":adminId,"email":email},
+				success: function(result) {
+					$("#coupon-used-p").html("Coupon successfully used.");
+					$("#coupon-used-h").html("<b>Coupon used!</b>");
+					$('#coupon_used_modal').modal();
+					$("#email").val("");
+					$("#coupon_code").val("");	
+					$.LoadingOverlay("hide");	
+				},
+				error: function(result){
+					$.LoadingOverlay("hide");	
+					$("#coupon-used-p").html("Coupon usage failed, please try again.<br>Error: "+result.responseJSON.message);
+					$("#coupon-used-h").html("<b>Coupon error!</b>");
+					$('#coupon_used_modal').modal();
+				}
+         });
+		});
+	
+		$("#create_new_receipt").click(function(e){
+			var valueReceipt = $("#valueReceipt").val();
+			var adminId = sessionStorage.getItem("customerId");
+			$.ajax({
+				url: "http://localhost:8123/api/v1/admin-controller/generateFiscal",
+				type: "POST",
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader ("Authorization", "Basic " + btoa( "api-user:admin" ));
+					},
+				data:{'value':valueReceipt,"adminId":adminId},
+				success: function(result) {
+					$("#receipt-p").html("Customer receipt code is: "+result);
+					$('#receipt_modal').modal();
+					$("#valueReceipt").val("");
+					document.getElementById('close_modal').addEventListener('click', clipboardCopy(result));
+					
+				},
+				error: function(){
+					$('#wrong_input_modal').modal();
+				}
+         });
+			e.preventDefault();
+			
+		});
+		
+		$("#create_new_campaign").click(function(e){
+			var campaign = $("#nb_access_events").val();
+			$.ajax({
+				url: "http://localhost:8123/api/v1/admin-controller/startCampaign",
+				type: "POST",
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader ("Authorization", "Basic " + btoa( "api-user:admin" ));
+					},
+				data:{'campaignType':campaign},
+				success: function(result) {
+					$("#coupon-used-p").html("Campaign successfuly generated, customers will receive their cupons shortly.");
+					$("#coupon-used-h").html("<b>Campaign started!</b>");
+					$('#coupon_used_modal').modal();
+					
+				},
+				error: function(){
+					$("#coupon-used-p").html("Something went wrong!");
+					$("#coupon-used-h").html("<b>Campaign failed!</b>");
+					$('#coupon_used_modal').modal();
+				}
+         });
+			e.preventDefault();
+			
+		});
+		
+	    async function clipboardCopy(code) {
+		  await navigator.clipboard.writeText(code);
+		}	
+
+		$(document).ready(function () {
+			if(sessionStorage.getItem("userType") != "admin"){
+				window.location="dashboard.html"
+			}
+		
+			$.ajax({
+				method: "GET",
+				url: "http://localhost:8123/api/v1/admin-controller/getCampaigns",
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader("Authorization", "Basic " + btoa("api-user:admin"));
+				},
+				success: function (result) {
+				
+					var select = $("#nb_access_events");
+					select.empty();
+					select.append("<option disabled selected>Select a campaign</option>"); 
+					for(var i=0;i<result.length;i++)
+					{	
+						var option="<option style=\"text-transform:capitalize\" value=\""+result[i]+"\">"+result[i]+"</option>";
+						select.append(option); 
+						console.log(select);
+					}	
+				}
+			})
+		});
+	</script>
+</body>
+
+</html>

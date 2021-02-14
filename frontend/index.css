@@ -1,0 +1,9 @@
+.spaced {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.ip_box {
+    width: 40px;
+    text-align: right;
+}

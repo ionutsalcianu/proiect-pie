@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="img/logo_uinion_black.png">
+  <link rel="icon" type="image/png" href="img/logo_uinion_black.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    COUPONS APP
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="css/fonts-google-roboto.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  
+  <link href="css/check-in/gijgo.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="">
+
+    <div class="modal fade" id="update_success_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Guest updated successfully!</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_update_success' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="update_success_master_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Updated master card successfully!</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_update_success_master' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="card_write_fail_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Cannot write card! Please try again. <br>If error persists, change card as it might be faulty.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_card_write_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="card_erase_fail_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Cannot erase card! Please try again. <br>If error persists, change card as it might be faulty.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_card_erase_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="write_master_no_name_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Please provide a name for the master card.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_no_name_master_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="no_guest_name_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Please provide the name of the guest.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_no_guest_name_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="inexistent_room_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Room does not exist. Please insert a valid room.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_inexistent_room_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="checkout_not_set_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Checkout date not specified. <br>Please fill checkout date to write card.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_checkout_not_set_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="invalid_checkout_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Checkout date cannot be smaller that current time and date.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_invalid_checkout_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="room_not_set_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><b>Please specify a room to write client card.</b></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class='templatemo-blue-button width-100' id='ok_room_not_set_fail' data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="register_success_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Guest registered successfully!</b></h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class='templatemo-blue-button width-100' id='ok_registered_success' data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal fade" id="write_master_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Master card written successfully!</b></h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class='templatemo-blue-button width-100' id='ok_write_master' data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="erase_card_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Card Erased Successfully!</b></h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class='templatemo-blue-button width-100' id='ok_erase_card' data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="alert_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Incorrect password!</b></h4>
+            </div>
+            <div class="modal-body">
+              <p>Please insert password again to clear event.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="clear_alert_modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Enter password to clear event</b></h4>
+            </div>
+            <div class="modal-body">
+              <center>
+                <form> 
+                    <input type = 'password' id='login_modal_password' placeholder = '********'> 
+                </form> 
+              </center>
+            </div>
+            <div class="modal-footer" id="clear_alert_modal_confirm_btn_div">
+              <!--button type="button" class='templatemo-blue-button width-100' id='confirm_clear_alert' data-dismiss="modal">Confirm</button-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div class="wrapper ">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="img/sidebar-1.jpg">
+      
+      <div class="logo">
+        <div class="row">
+            <div class="column" style="width: 30%; margin-left: 13%">
+              <img style="width:40px" src="img/logo_uinion_black.png" />
+            </div>
+            <div class="column" style="width:70%; margin-left: -160%">
+              <a href="#" class="simple-text logo-normal">
+                  BMS
+              </a>
+            </div>
+          </div>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" href="./dashboard.html">
+              <i class="material-icons">dashboard</i>
+              <p>Rooms Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="./rooms_settings.html">
+                <i class="material-icons">settings</i>
+                <p>Rooms Settings</p>
+              </a>
+          </li>
+          <li class="nav-item active ">
+            <a class="nav-link" href="./check-in.html">
+              <i class="material-icons">content_paste</i>
+              <p>Check-in/out</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./history.html">
+              <i class="material-icons">history</i>
+              <p>Rooms Access Events</p>
+            </a>
+          </li>
+          <li class="nav-item "  id='create_user_tab'>
+            <a class="nav-link" href="./user.html">
+              <i class="material-icons">person</i>
+              <p>Create User</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper" id="#check-in-title">
+            <a class="navbar-brand" >Check-in Guest</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li> -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">notifications</i>
+                    <span class="notification" id="number_of_alerts"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" id="alerts_enumeration_div">
+                    <a class="dropdown-item" href="#">No active alerts!</a>
+                  </div>
+                </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
+                  <p class="d-lg-none d-md-block">
+                    Account
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                  <a class="dropdown-item" href="#" id="username_display"></a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" id="logout">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid" >
+          <div class="row">
+            <div class="col-md-6" style="margin-left: auto; margin-right: auto;">
+              <div class="card">
+                <div class="card-header card-header-info">
+                  <h4 class="card-title ">Check-in form</h4>
+                  <p class="card-category">  Add new check-in and write access card  </p>
+                </div>
+                <div class="card-body">
+                    <div class='row' style='display:flex;margin-left: 0.05%; ' id='write_master_card'>
+                        <div class='column'>
+                          <h4 class="text-info"><b>Master card: </b></h4>
+                        </div>
+                        <div class='column'>
+                            <div style='margin-right:40%; margin-left:auto; height: 35%;'>
+                                <label class='switch'>
+                                  <input type='checkbox' id='cleaning_card_toggle'>
+                                  <span class='slider round'></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                  <h4 class="text-info" id="guestNameText"><b>Guest Name: </b></h4>
+                  <input type="text" class="form-control" id="guestName" width="560">
+                  <h4 class="text-info" id="guestRoomText"><b>Guest Room: </b></h4>
+                  <input type="text" class="form-control" id="guestRoom" width="560">
+                  <h4 class="text-info" id="checkInText"><b>Start Date: </b></h4>
+                  <div class="picker" id="checkInPicker">
+                    <input id="startDate" class="form-control" width="280" style="border-color: #d2d2d2;"/> &nbsp;&nbsp;&nbsp;
+                    <input id="startTime" class="form-control" width="280" style="border-color: #d2d2d2;"/>
+                  </div>
+                  <h4 class="text-info" id="checkOutText"><b>End Date: </b></h4>
+                  <div class="picker" id="checkOutPicker">
+                    <input id="endDate" class="form-control" width="280" style="border-color: #d2d2d2;"/> &nbsp;&nbsp;&nbsp;
+                    <input id="endTime" class="form-control" width="280" style="border-color: #d2d2d2;"/>
+                  </div>
+                </div>
+                    
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-left: auto; margin-right: auto;" id="buttons_card_absent">
+          <div class="col-md-4" style="margin-left: auto; margin-right: auto;">
+            <button class="btn btn-info-inactive btn-block" id="absent_card">Please set card on card reader!</button> 
+          </div>
+        </div>
+
+        <div class="row" style="margin-left: auto; margin-right: auto; display: none;" id="buttons_card_present" >
+          <div class="col-md-2" style="margin-left: auto;" id="register_guest_div">
+            <button class="btn btn-info btn-block" id="register_guest">Register Guest</button> 
+          </div>
+          <div class="col-md-2" style="margin-right: auto;">
+            <button class="btn btn-info btn-block" id="erase_card">Erase Acccess Card</button> 
+          </div>
+        </div>
+
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="copyright float-right">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>, <a href="http://hbfsrobotics.com" target="_blank">HBFS Robotics</a> for 
+              <a href="http://unionplaza.ro" target="_blank">Union Plaza Hotel</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+ 
+  <!--   Core JS Files   -->
+  <script src="js/core/jquery.min.js"></script>
+  <script src="js/core/popper.min.js"></script>
+  <script src="js/core/bootstrap-material-design.min.js"></script>
+  <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <!-- <script src="js/plugins/jquery.validate.min.js"></script> -->
+  <!-- Library for adding dinamically elements -->
+  <script src="js/plugins/arrive.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="js/plugins/bootstrap-notify.js"></script>
+
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="js/checkin_user.js" type="text/javascript"></script>
+  <script src="js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+  
+  <!-- <script src='js/graph_interface.js'></script>
+  <script src='js/nfc_interface.js'></script> -->
+  <script src='js/graph_interface.js'></script>
+  <script src='js/nfc_interface.js'></script>
+  
+  <script src="js/check-in/gijgo.js" type="text/javascript"></script>
+  <script src="js/check-in/gijgo.min.js" type="text/javascript"></script>
+
+  <script>
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    
+    $('#startDate').datepicker({
+      uiLibrary: 'materialdesign',
+        minDate: today,
+        maxDate: function(){
+          return $('#endDate').val();
+        },
+        format: 'dd-mm-yyyy'
+    });
+    $('#endDate').datepicker({
+      uiLibrary: 'materialdesign',
+        minDate: function(){
+          start_date = $('#startDate').val().split("-");
+          var date = new Date();
+          date.setDate(parseInt(start_date[0]) + 1);
+          date.setMonth(parseInt(start_date[1]) - 1);
+          date.setFullYear(parseInt(start_date[2]));
+          return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        },
+        format: 'dd-mm-yyyy'
+    });
+    $('#startTime').timepicker({
+      uiLibrary: 'materialdesign',
+      value: '12:00',
+      modal: true,
+      header: true, 
+      footer: false,
+      mode: '24hr'
+    });
+    $('#endTime').timepicker({
+      uiLibrary: 'materialdesign',
+      value: '12:00',
+      modal: true,
+      header: true, 
+      footer: false,
+      mode: '24hr'
+    });
+
+    function displayCardProgramMessage( reply )
+    {
+        console.log( reply  );
+        console.log('>>>>>>>>>>>>>>>>>>>', $('#register_guest').html());
+        if( reply.success == true && $('#cleaning_card_toggle').is(":checked") && $('#register_guest').html().includes('Write Master Card') ) {
+          $("#write_master_modal").modal();
+          $('#register_guest').html('Modify Master Card'); 
+        }
+        else if( reply.success == true && $('#cleaning_card_toggle').is(":checked") ) {
+          $("#update_success_master_modal").modal();
+        }
+        else if( reply.success == true && $('#register_guest').html().includes('Register Guest') ) {
+          $("#register_success_modal").modal();
+          $('#register_guest').html('Modify Guest'); 
+        }
+        else if( reply.success == true ) {
+          $("#update_success_modal").modal();
+        }
+        else {
+          $("#card_write_fail_modal").modal();
+        }
+    }
+
+    function displayErasedMessage( reply )
+    {
+        console.log( reply  );
+        if( reply.success == true && $('#cleaning_card_toggle').is(":checked") ) {
+          $("#guestName").val( '' );
+          $('#register_guest').html('Register Guest'); 
+          if( BMSGraphClient.account.getUserData().role != 2) {
+            $('#cleaning_card_toggle').click();
+          }  
+          $('#guestName').val( '' ) ;
+          $('#guestRoom').val( '' );
+
+          $('#startDate').val( '' );
+          $('#startTime').val( '12:00' );
+
+          $('#endDate').val( '' );
+          $('#endTime').val( '12:00' );
+          $("#erase_card_modal").modal();
+        }
+        else if( reply.success == true ) {
+          $("#erase_card_modal").modal();
+          setTimeout(function() {
+            $('#guestName').val( '' ) ;
+            $('#guestRoom').val( '' );
+
+            $('#startDate').val( '' );
+            $('#startTime').val( '12:00' );
+
+            $('#endDate').val( '' );
+            $('#endTime').val( '12:00' );
+
+            $('#register_guest').html('Register Guest');
+            $('#register_guest').show();
+
+          }, 100);
+        }
+        else {
+          $("#card_erase_fail_modal").modal();
+        }
+    }
+
+    function writeClientCard( client_id, client_room, checkout )
+    {
+        var card_data = 
+        {
+            card_type: 'CLIENT',
+            identifier: client_id,  // to track users, set to BMSGraph.createBlient token result
+            expiration: checkout,
+            data: [ client_room ]            // array of rooms to access
+        }; 
+
+        var service_data = 
+        {
+            card_type: 'SERVICE_CONFIGURE',
+            identifier: 0x23415058,
+            expiration: 0,
+            data: [
+                {
+                    parameter: 0x02, // IP Address
+                    value: [ 192, 168, 1, 88 ]
+                }
+            ]
+        }
+        //console.log('>>>>CARD WRITTEN');
+        NFCAccessClient.program( card_data, displayCardProgramMessage );   
+    }
+
+    function eraseClientCard(  )
+    {
+        NFCAccessClient.program( { card_type: 'BLANK' }, displayErasedMessage );
+        window.displayed_current_client_id = null;
+        window.displayed_current_employee_id = null;
+    }
+
+    function createClient( room, name, checkout, checkin )
+    {   
+        // create new account
+        return BMSGraphClient.clients.createClient( room, name, checkout , checkin  ).then( ( response ) => 
+        {
+            console.log( 'CREATE CLIENT', response );
+            // check response
+            if( response.success )
+            {
+                // use the client TOKEN to send to the card writer interface
+                //console.log( 'CLIENT Access Card token is:', response.data.identifier );
+                //$("#register_success_modal").modal();
+                writeClientCard( response.data.identifier, room, checkout );
+                window.displayed_current_client_id = response.data.identifier;
+                if( $('#startDate').val().length < 4 ) {
+                  var lazy_people_checkin_date = new Date( Date.now() );
+                  $('#startDate').val( ("0" + lazy_people_checkin_date.getDate()).slice(-2) + "-" + ("0" + (lazy_people_checkin_date.getMonth()+1)).slice(-2) + "-" + lazy_people_checkin_date.getFullYear().toString() );
+                }
+            }
+            else {
+              //console.log('>>>>>>>>>>>>>>>>>>>>>>ERROR WRITING CLIENT: ', response.error);
+              if( response.error.includes('Path `name` is required') ) {
+                $("#no_guest_name_modal").modal();
+              }
+              else if( response.error.includes('does not exist') ) {
+                $("#inexistent_room_modal").modal();
+              }
+              else if( response.error.includes('"NaN" at path "checkout"') ){ 
+                $("#checkout_not_set_modal ").modal(); 
+              }
+              else if( response.error.includes('Expected type Int!, found NaN') ) {
+                $("#room_not_set_modal ").modal();
+              }
+            }
+        });
+    }
+
+    function createEmployee( name )
+    {   
+        // create new account
+        return BMSGraphClient.employees.createEmployee( name, window.RoomList  ).then( ( response ) => 
+        {
+            console.log( 'CREATE EMPLOYEE', response );
+            // check response
+            if( response.success )
+            {
+                // use the client TOKEN to send to the card writer interface
+                //console.log( 'CLIENT Access Card token is:', response.data.identifier );
+               
+                writeMasterCard( response.data.identifier )
+                //$('#register_guest').html('Modify Master Card');
+                window.displayed_current_employee_id = response.data.identifier;
+                
+            }
+            else {
+              $('#write_master_no_name_modal').modal();
+            }
+        });
+    }
+
+    function getClient( identifier )
+    {
+        //var identifier = 1576599421;
+
+        // create new account
+        return BMSGraphClient.clients.getClient( identifier ).then( ( response ) => 
+        {
+            console.log( 'GET CLIENT', response );
+
+            // check response
+            if( response.success )
+            {
+                // use the client TOKEN to send to the card writer interface
+                console.log( 'CLIENT Access Card token is:', response.data );
+
+                window.displayed_current_client_id = response.data.identifier;
+
+                $('#guestName').val( response.data.name ) ;
+                $('#guestRoom').val( response.data.room );
+                //date_detail = response.data.checkin.split(" ");
+                //var checkin_date = new Date(date_detail[0] +date_detail[1] +date_detail[2] +date_detail[3]);
+
+                $('#startDate').val( ("0" + response.data.checkin.getDate()).slice(-2) + "-" + ("0" + (response.data.checkin.getMonth()+1)).slice(-2) + "-" + response.data.checkin.getFullYear().toString() );
+                $('#startTime').val( ("0" + response.data.checkin.getHours()).slice(-2) + ":" + ("0" + response.data.checkin.getMinutes()).slice(-2) );
+
+                $('#endDate').val( ("0" + response.data.checkout.getDate()).slice(-2) + "-" + ("0" + (response.data.checkout.getMonth()+1)).slice(-2) + "-" + response.data.checkout.getFullYear().toString() );
+                $('#endTime').val( ("0" + response.data.checkout.getHours()).slice(-2) + ":" + ("0" + response.data.checkout.getMinutes()).slice(-2) );
+
+                
+                $('#register_guest').html('Modify Guest');
+                $('#check-in-title').click();
+            }
+            else{
+              $('#register_guest').html('Register Guest');
+            } 
+        });
+    }
+
+    function getEmployee( identifier )
+    {
+        // create new account
+        return BMSGraphClient.employees.getEmployee( identifier ).then( ( response ) => 
+        {
+            console.log( 'GET EMPLOYEE', response );
+
+            // check response
+            if( response.success )
+            {
+                // use the client TOKEN to send to the card writer interface
+                console.log( 'CLIENT Access Card token is:', response.data );
+
+                window.displayed_current_employee_id = response.data.identifier;
+
+                $('#guestName').val( response.data.name ) ;
+
+                $('#register_guest').html('Modify Master Card');
+                $('#check-in-title').click();
+            }
+            else{
+              $('#register_guest').html('Write Master Card');
+            } 
+        });
+    }
+
+    
+    $('#cleaning_card_toggle').click( function() {
+      if( $('#cleaning_card_toggle').is(":checked") ) {
+        //$('#guestNameText').hide();
+        $('#guestNameText').html('<b>Attribute Card To:</b>')
+        //$('#guestName').hide();
+        $('#guestRoomText').hide();
+        $('#guestRoom').hide();
+        $('#checkInText').hide();
+        $('#checkInPicker').hide();
+        $('#checkOutText').hide();
+        $('#checkOutPicker').hide();
+        $('#register_guest').html('Write Master Card');
+      }
+      else{
+        $('#guestNameText').show();
+        $('#guestNameText').html('<b>Guest Name:</b>')
+        $('#guestName').show();
+        $('#guestRoomText').show();
+        $('#guestRoom').show();
+        $('#checkInText').show();
+        $('#checkInPicker').show();
+        $('#checkOutText').show();
+        $('#checkOutPicker').show();
+        $('#register_guest').html('Register Guest');
+        if( BMSGraphClient.account.getUserData().role == 2 )
+          $("#write_master_card").hide();
+          $("#register_guest").show();
+      }
+    });
+
+    $('#register_guest').click( function(event) {
+      if( $('#cleaning_card_toggle').is(":checked") ) {
+        //writeCleaningCard();
+        //console.log('>>>>>>>>>>>>>>>>>>>>>>>Creating Master Card')
+        var employeeName = $('#guestName').val();
+        createEmployee( employeeName );
+      }
+      else {
+        var startDate = new Date();
+        if( $('#startDate').val().length > 4 )
+        {
+          start_date = $('#startDate').val().split("-");
+          startDate.setDate(parseInt(start_date[0]));
+          startDate.setMonth(parseInt(start_date[1]) - 1);
+          startDate.setYear(parseInt(start_date[2]));
+          start_time = $('#startTime').val().split(":");
+          startDate.setHours(parseInt(start_time[0]));
+          startDate.setMinutes(parseInt(start_time[1]));
+          startDate.setSeconds(0);
+        }
+        else 
+        {
+          startDate = Date.now();
+        }
+
+        var endDate = new Date();
+        end_date = $('#endDate').val().split("-");
+        endDate.setDate(parseInt(end_date[0]));
+        endDate.setMonth(parseInt(end_date[1]) - 1);
+        endDate.setYear(parseInt(end_date[2]));
+        end_time = $('#endTime').val().split(":");
+        endDate.setHours(parseInt(end_time[0]));
+        endDate.setMinutes(parseInt(end_time[1]));
+        endDate.setSeconds(0);
+
+        var date_now = new Date();
+        if( endDate < date_now ) {
+          $('#invalid_checkout_modal').modal();
+          return;
+        }
+
+        var clientName = $('#guestName').val();
+        var clientRoom = parseInt($('#guestRoom').val());
+        
+        console.log("Check-in date", startDate);
+        console.log("Check-out date", endDate);
+
+        //writeClientCard( endDate );
+
+        if( window.displayed_current_client_id ){
+          console.log( 'FUNCTION CALLED WITH ID ',window.displayed_current_client_id );
+          updateClient( window.displayed_current_client_id, {room: clientRoom, name: clientName, checkout: endDate, checkin: startDate} );
+
+          
+        }
+        else {
+          createClient( clientRoom, clientName, endDate, startDate );
+        }
+      }
+      });
+
+      function updateClient( client_id, client_details )
+      {
+          // update account
+          return BMSGraphClient.clients.updateClient( client_id, client_details ).then( ( response ) => 
+          {
+              console.log( 'UPDATED CLIENT', response );
+              //$("#update_success_modal").modal();
+              writeClientCard( response.data.identifier, client_details.room, client_details.checkout );
+          });
+          
+      }
+
+      $('#erase_card').click(function(event) {
+        
+        eraseClientCard();
+
+      });
+
+      function writeCleaningCard() {
+        var cleaning_data = 
+        {
+            card_type: 'CLEANING',
+            identifier: 0xAA000000,
+            expiration: 0x00000000,
+            data: []
+        }
+
+        NFCAccessClient.program( cleaning_data, displayCardProgramMessage );
+        //$("#write_master_modal").modal();
+      }
+
+      function writeMasterCard( employee_id ) {
+        var card_data = 
+        {
+            card_type: 'STAFF',
+            identifier: employee_id,
+            expiration: 0,
+            data: window.RoomList            
+        }; 
+
+        console.log('>>>>CARD WRITTEN');
+        NFCAccessClient.program( card_data, displayCardProgramMessage );
+      }
+
+      $(document).ready(function() {
+        // add client card listeners
+        NFCAccessClient.card.addEventListener( 'enter', function( e ) 
+        {
+            //console.log( 'CARD ENTER', e.detail );
+            // display data
+            if ( (e.detail.card_type == 'STAFF'  || e.detail.identifier == 2852126720 ) && BMSGraphClient.account.getUserData().role != 2) {
+              $('#cleaning_card_toggle').click();
+              getEmployee( e.detail.identifier );
+
+              if( BMSGraphClient.account.getUserData().role == 2 ) {
+                $('#write_master_card').show();
+              }
+            }
+            else if( e.detail.card_type == 'STAFF'  || e.detail.identifier == 2852126720 ) {
+              $('#write_master_card').show();
+              $('#cleaning_card_toggle').click();
+              $('#guestNameText').hide();
+              $('#guestName').hide();
+            }
+            else {
+              if( e.detail.identifier ) {
+                console.log(parseInt( e.detail.identifier ));
+                getClient(e.detail.identifier);
+              }
+            }
+
+            $('#buttons_card_absent').hide();
+            $('#buttons_card_present').show();
+            if( (e.detail.card_type == 'STAFF'  || e.detail.identifier == 2852126720 ) && BMSGraphClient.account.getUserData().role == 2  )
+              $('#register_guest').hide();
+            else 
+              $('#register_guest').show();
+            $('#erase_card').show();
+        });
+
+        // add client card listeners
+        NFCAccessClient.card.addEventListener( 'exit', function( e ) 
+        {
+            //console.log( 'CARD EXIT', e.detail );
+            // display data
+            console.log(JSON.stringify( e.detail ));
+            $('#buttons_card_absent').show();
+            $('#buttons_card_present').hide();
+
+            $('#guestName').val( '' ) ;
+            $('#guestRoom').val( '' );
+
+            $('#startDate').val( '' );
+            $('#startTime').val( '12:00' );
+
+            $('#endDate').val( '' );
+            $('#endTime').val( '12:00' );
+            window.displayed_current_client_id = null;
+            window.displayed_current_employee_id = null;
+            window.location = "check-in.html";
+        });
+
+        if( BMSGraphClient.account.getUserData().role == 2) {
+          $('#write_master_card').hide();
+          $('#create_user_tab').hide();
+        }
+        else {
+          $('#write_master_card').show();
+          $('#create_user_tab').show();
+        }
+
+      });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+
+      
+      window.displayed_current_client_id = null;
+      window.displayed_current_employee_id = null;
+
+
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+            $('.fixed-plugin .dropdown').addClass('open');
+          }
+
+        }
+
+        $('.fixed-plugin a').click(function(event) {
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function() {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function() {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function() {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          // simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

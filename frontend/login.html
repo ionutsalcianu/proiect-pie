@@ -1,0 +1,243 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="img/coupon.png">
+  <title>
+    COUPONS APP
+  </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="css/fonts-google-roboto.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="css/templatemo-style.css" rel="stylesheet">
+  <link href="css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+    <!-- <div class="sidebar" data-color="purple" data-background-color="white">
+      
+      <div class="logo">
+        <div class="row">
+          <div class="column" style="width: 30%; margin-left: 13%">
+            <img style="width:40px" src="img/logo_uinion_black.png" />
+          </div>
+          <div class="column" style="width:70%; margin-left: -160%">
+            <a href="#" class="simple-text logo-normal">
+                BMS
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+    <div class="main-panel-login">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <!-- <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
+          </div> -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <!-- <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+            <div class="templatemo-content-widget templatemo-login-widget white-bg">
+                <header class="text-center">
+                      <h1>Login</h1>
+                    </header>
+                    <form class="templatemo-login-form" >
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><i class="material-icons">person</i></div>	        		
+                          &nbsp;&nbsp; <input type="text" class="form-control" placeholder="username" id="username">           
+                          </div>	
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon"><i class="material-icons">vpn_key</i></div>	        		
+                          &nbsp;&nbsp; <input type="password" class="form-control" placeholder="******" id="password">           
+                          </div>	
+                      </div>	          	
+                  <!----<div class="form-group">
+                      <div class="checkbox squaredTwo">
+                          <input type="checkbox" id="c1" name="cc" />
+                      <label for="c1"><span></span>Remember me</label>
+                      </div>				    
+                  </div>-->
+                  <div class="form-group">
+                    <button type="submit" class="templatemo-blue-button width-100" id="submit">Login</button>
+                  </div>
+				  <div class="'form-group">
+					  <a href="register.html">Don't have an account?</a>
+				  </div>
+                    </form>
+              </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+          </div>
+          <!-- your footer here -->
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="js/core/jquery.min.js"></script>
+  <script src="js/core/popper.min.js"></script>
+  <script src="js/core/bootstrap-material-design.min.js"></script>
+  <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+
+  
+  <script src='js/graph_interface.js'></script>
+  <script src='js/nfc_interface.js'></script>
+
+  <script>
+  //  window.BMSGraphClient = BMSGraph.use( 'http://localhost/graphql' );
+    $( '#submit' ).click( ( evt ) => {
+      evt.preventDefault();
+
+     
+      validate_login();
+	//   window.location = "dashboard.html";
+    });
+
+    var attempt = 3; // Variable to count number of attempts.
+    // Below function Executes on click of login button.
+    function validate_login(){
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+	 
+	  
+      // forward login data to backend endpoint
+	  	  
+		<!-- var xhr = new XMLHttpRequest(); -->
+		<!-- xhr.open('POST', 'http://localhost:8123/api/v1/auth-controller/login', true); -->
+		<!-- xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); -->
+		<!-- xhr.onload = function () {     // do something to response  -->
+		<!-- console.log(this.responseText); }; -->
+		<!-- xhr.send('email=person&pwd=password&organization=place');   -->
+		  
+      $.ajax({
+            url: "http://localhost:8123/api/v1/auth-controller/login",
+            type: "POST",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader ("Authorization", "Basic " + btoa( "api-user:admin" ));
+				},
+            data:{'email':username,'password':password},
+            success: function(result) {
+				console.log(result);
+				sessionStorage.setItem("customerId", result.id);
+				sessionStorage.setItem("lastName", result.lastName);
+				sessionStorage.setItem("firstName", result.firstName);
+				sessionStorage.setItem("email", result.email);
+				sessionStorage.setItem("userType", result.userType);
+
+                 window.location = "dashboard.html";
+            },
+			error: function(result) {
+				alert("parola gresita");
+			}
+         })
+      // get token for some credentials and set the token
+      // BMSGraphClient.account.login( username, password ).then( ( response ) => 
+      // { 
+      //     // check success or fail
+      //     if( response.success ) 
+      //     {
+      //         // save user data
+      //         BMSGraphClient.account.setUserData( response.data );
+
+      //         // may use this token for some specific requests
+      //         BMSGraphClient.account.useToken( response.data.token );
+
+      //         // save token in client persistent storage 
+      //         BMSGraphClient.account.saveToken( response.data.token );
+
+      //         console.log( 'SIGN IN Success' );
+
+      //         // Redirecting to other page.
+      //         window.location = "dashboard.html"; 
+      //         return false;
+      //     }
+      //     else
+      //     {
+      //         console.log( 'SIGN IN Failed, REASON: ' + ( response.data.errors.message || 'Unknown' ) );
+      //         attempt --;// Decrementing by one.
+      //         alert("You have left " + attempt + " attempt;");
+      //         // Disabling fields after 3 attempts.
+      //         if( attempt == 0){
+      //           document.getElementById("username").disabled = true;
+      //           document.getElementById("password").disabled = true;
+      //           document.getElementById("submit").disabled = true;
+      //           return false;
+      //         }
+      //     }
+      // });
+      
+    }
+    <!-- setTimeout( () =>  -->
+    <!-- { -->
+        <!-- // check if user is logged in -->
+        <!-- BMSGraphClient.account.isAuthorized().then( ( userdata ) =>  -->
+        <!-- { -->
+            <!-- // save user data for client -->
+            <!-- if( userdata !== false ) -->
+            <!-- { -->
+                <!-- // set user data manually -->
+                <!-- BMSGraphClient.account.setUserData( userdata ); -->
+                <!-- console.log( 'AUTHORIZED USER: ', BMSGraphClient.account.getUserData().username ); -->
+            <!-- } -->
+            <!-- else -->
+            <!-- { -->
+                <!-- console.log( 'AUTHORIZATION FAILED' ); -->
+                <!-- // logout to clear user information -->
+                <!-- BMSGraphClient.account.logout(); -->
+            <!-- } -->
+        <!-- }); -->
+    <!-- }, 2500 ); -->
+  </script>
+</body>
+
+</html>
