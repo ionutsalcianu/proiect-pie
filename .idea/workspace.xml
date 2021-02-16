@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b3ca798-72a1-4bea-9546-09fc9206b995" name="Default Changelist" comment="update all changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ro/pie/service/MailjetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ro/pie/service/MailjetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ro/pie/service/MailjetService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ro/pie/service/MailjetService.class" afterDir="false" />
-    </list>
+    <list default="true" id="3b3ca798-72a1-4bea-9546-09fc9206b995" name="Default Changelist" comment="update all changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +77,7 @@
       <workItem from="1613153302431" duration="8681000" />
       <workItem from="1613203422288" duration="12861000" />
       <workItem from="1613233492949" duration="1831000" />
-      <workItem from="1613282364280" duration="5570000" />
+      <workItem from="1613282364280" duration="5582000" />
     </task>
     <servers />
   </component>
